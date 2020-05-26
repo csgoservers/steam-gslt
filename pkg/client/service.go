@@ -1,25 +1,36 @@
-package service
+package client
 
 import (
+	"fmt"
+	"io/ioutil"
 	"net/http"
-
-	"github.com/csgoservers/steam-gameserver-service/pkg/api"
 )
 
-// GameServerService is the base structure to call methods of the
+// gameServerService is the base structure to call methods of the
 // Steam IGameServersService interface.
-type GameServerService struct {
+type gameServerService struct {
 	http *http.Client
+	url  string
 }
 
 // New creates a new service client to make requests to the Steam API
-func New() *GameServerService {
+func newService() *gameServerService {
 	client := &http.Client{}
-	return &GameServerService{client}
+	return &gameServerService{client, "https://api.steampowered.com/IGameServersService/"}
 }
 
-// GetAccountList returns a list of game server accounts with their
-// connection tokens.
-func (g *GameServerService) GetAccountList() (*api.Account, error) {
-	return nil, nil
+// get executes a request to retrieve some data from the service
+func (g *gameServerService) get(method string) ([]byte, error) {
+	url := fmt.Sprintf("%s/%s/%s", g.url, method, "v1")
+
+	req, err := http.NewRequest(http.MethodGet, url, nil)
+	if err != nil {
+		return nil, err
+	}
+	res, err := g.http.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer res.Body.Close()
+	return ioutil.ReadAll(res.Body)
 }
