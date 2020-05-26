@@ -1,0 +1,419 @@
+{
+	"info": {
+		"_postman_id": "91cf6039-8721-46fc-ad14-e0f86936b86c",
+		"name": "Steam IGameServersService",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetAccountList",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "https://api.steampowered.com/IGameServersService/GetAccountList/v1?key={{key}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"steampowered",
+						"com"
+					],
+					"path": [
+						"IGameServersService",
+						"GetAccountList",
+						"v1"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{key}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateAccount",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "key",
+							"value": "{{key}}",
+							"type": "text"
+						},
+						{
+							"key": "appid",
+							"value": "{{appid}}",
+							"type": "text"
+						},
+						{
+							"key": "memo",
+							"value": "From Postman",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://api.steampowered.com/IGameServersService/CreateAccount/v1/",
+					"protocol": "https",
+					"host": [
+						"api",
+						"steampowered",
+						"com"
+					],
+					"path": [
+						"IGameServersService",
+						"CreateAccount",
+						"v1",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SetMemo",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "key",
+							"value": "{{key}}",
+							"type": "text"
+						},
+						{
+							"key": "steamid",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "memo",
+							"value": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://api.steampowered.com/IGameServersService/SetMemo/v1/",
+					"protocol": "https",
+					"host": [
+						"api",
+						"steampowered",
+						"com"
+					],
+					"path": [
+						"IGameServersService",
+						"SetMemo",
+						"v1",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ResetLoginToken",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "key",
+							"value": "{{key}}",
+							"type": "text"
+						},
+						{
+							"key": "steamid",
+							"value": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://api.steampowered.com/IGameServersService/ResetLoginToken/v1/",
+					"protocol": "https",
+					"host": [
+						"api",
+						"steampowered",
+						"com"
+					],
+					"path": [
+						"IGameServersService",
+						"ResetLoginToken",
+						"v1",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteAccount",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "key",
+							"value": "{{key}}",
+							"type": "text"
+						},
+						{
+							"key": "steamid",
+							"value": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://api.steampowered.com/IGameServersService/DeleteAccount/v1/",
+					"protocol": "https",
+					"host": [
+						"api",
+						"steampowered",
+						"com"
+					],
+					"path": [
+						"IGameServersService",
+						"DeleteAccount",
+						"v1",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAccountPublicInfo",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "https://api.steampowered.com/IGameServersService/GetAccountPublicInfo/v1?key={{key}}&steamid=",
+					"protocol": "https",
+					"host": [
+						"api",
+						"steampowered",
+						"com"
+					],
+					"path": [
+						"IGameServersService",
+						"GetAccountPublicInfo",
+						"v1"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{key}}"
+						},
+						{
+							"key": "steamid",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "QueryLoginToken",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "https://api.steampowered.com/IGameServersService/QueryLoginToken/v1?key={{key}}&login_token=",
+					"protocol": "https",
+					"host": [
+						"api",
+						"steampowered",
+						"com"
+					],
+					"path": [
+						"IGameServersService",
+						"QueryLoginToken",
+						"v1"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{key}}"
+						},
+						{
+							"key": "login_token",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SetBanStatus",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "key",
+							"value": "{{key}}",
+							"type": "text"
+						},
+						{
+							"key": "steamid",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "banned",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "ban_seconds",
+							"value": "60",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://partner.steam-api.com/IGameServersService/SetBanStatus/v1/",
+					"protocol": "https",
+					"host": [
+						"partner",
+						"steam-api",
+						"com"
+					],
+					"path": [
+						"IGameServersService",
+						"SetBanStatus",
+						"v1",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetServerSteamIDsByIP",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.steampowered.com/IGameServersService/GetServerSteamIDsByIP/v1?key={{key}}&server_ips=",
+					"protocol": "https",
+					"host": [
+						"api",
+						"steampowered",
+						"com"
+					],
+					"path": [
+						"IGameServersService",
+						"GetServerSteamIDsByIP",
+						"v1"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{key}}"
+						},
+						{
+							"key": "server_ips",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetServerIPsBySteamID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.steampowered.com/IGameServersService/GetServerIPsBySteamID/v1?key={{key}}&server_steamids=",
+					"protocol": "https",
+					"host": [
+						"api",
+						"steampowered",
+						"com"
+					],
+					"path": [
+						"IGameServersService",
+						"GetServerIPsBySteamID",
+						"v1"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{key}}"
+						},
+						{
+							"key": "server_steamids",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "e5fd7832-7db9-41d6-8a06-53dac1b519eb",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "9b54cffd-6ce6-477f-8b16-394179a305a1",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
