@@ -17,7 +17,7 @@ type gameServerService struct {
 // New creates a new service client to make requests to the Steam API
 func newService(key string) *gameServerService {
 	client := &http.Client{}
-	return &gameServerService{client, "https://api.steampowered.com/IGameServersService/", key}
+	return &gameServerService{client, "https://api.steampowered.com/IGameServersService", key}
 }
 
 // get executes a request to retrieve some data from the service
