@@ -8,8 +8,8 @@ type SteamService struct {
 }
 
 // New creates a SteamService to make network requests to the Steam API
-func New() *SteamService {
-	return &SteamService{newService()}
+func New(apiKey string) *SteamService {
+	return &SteamService{newService(apiKey)}
 }
 
 // GetAccountList returns a list of game server accounts with their
