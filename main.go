@@ -16,5 +16,10 @@ func main() {
 		return
 	}
 	steam := client.New(*key)
-	steam.GetAccountList()
+	response, err := steam.GetAccountList()
+	if err != nil {
+		log.Printf("Error calling GetAccountList: %v", err)
+		return
+	}
+	log.Println(response.Accounts)
 }

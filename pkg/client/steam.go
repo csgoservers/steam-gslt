@@ -1,6 +1,10 @@
 package client
 
-import "github.com/csgoservers/steam-gameserver-service/pkg/api"
+import (
+	"encoding/json"
+
+	"github.com/csgoservers/steam-gameserver-service/pkg/api"
+)
 
 // SteamService to retrieve and send data
 type SteamService struct {
@@ -14,7 +18,15 @@ func New(apiKey string) *SteamService {
 
 // GetAccountList returns a list of game server accounts with their
 // connection tokens.
-func (s *SteamService) GetAccountList() (*[]api.Account, error) {
-	_, err := s.service.get("GetAccountList")
-	return nil, err
+func (s *SteamService) GetAccountList() (*api.AccountResponse, error) {
+	result, err := s.service.get("GetAccountList")
+	if err != nil {
+		return nil, err
+	}
+	var wrapper api.AccountWrapperResponse
+	err = json.Unmarshal(result, &wrapper)
+	if err != nil {
+		return nil, err
+	}
+	return &wrapper.Raw, nil
 }

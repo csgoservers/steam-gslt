@@ -1,0 +1,19 @@
+{
+    "response": {
+        "is_banned": true,
+        "expires": 0,
+        "actor": "76561197900265728",
+        "last_action_time": 0,
+        "servers": [
+            {
+                "steamid": "1111",
+                "appid": 730,
+                "login_token": "abc",
+                "memo": "test",
+                "is_deleted": false,
+                "is_expired": true,
+                "rt_last_logon": 1589448113
+            }
+        ]
+    }
+}
