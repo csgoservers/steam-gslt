@@ -34,9 +34,9 @@ func (s *SteamService) GetAccountList() (*api.AccountResponse, error) {
 }
 
 // CreateAccount creates a persistent game server account
-func (s *SteamService) CreateAccount(appID uint32, memo string) (*api.Account, error) {
+func (s *SteamService) CreateAccount(appID int, memo string) (*api.Account, error) {
 	data := url.Values{}
-	data.Add("appid", strconv.Itoa(int(appID)))
+	data.Add("appid", strconv.Itoa(appID))
 	data.Add("memo", memo)
 
 	result, err := s.service.post("CreateAccount", data)
@@ -48,5 +48,9 @@ func (s *SteamService) CreateAccount(appID uint32, memo string) (*api.Account, e
 	if err != nil {
 		return nil, err
 	}
+	// fill object with data that is not present
+	// in the response object
+	account.AppID = appID
+	account.Memo = memo
 	return &account, nil
 }
