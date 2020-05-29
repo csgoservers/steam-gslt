@@ -19,8 +19,3 @@ type AccountResponse struct {
 	LastActionTime int       `json:"last_action_time"`
 	Accounts       []Account `json:"servers"`
 }
-
-// AccountWrapperResponse is a wrapper around AccountResponse
-type AccountWrapperResponse struct {
-	Raw AccountResponse `json:"response"`
-}

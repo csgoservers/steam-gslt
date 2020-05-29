@@ -25,12 +25,12 @@ func (s *SteamService) GetAccountList() (*api.AccountResponse, error) {
 	if err != nil {
 		return nil, err
 	}
-	var wrapper api.AccountWrapperResponse
+	var wrapper api.AccountResponse
 	err = json.Unmarshal(result, &wrapper)
 	if err != nil {
 		return nil, err
 	}
-	return &wrapper.Raw, nil
+	return &wrapper, nil
 }
 
 // CreateAccount creates a persistent game server account
@@ -39,10 +39,14 @@ func (s *SteamService) CreateAccount(appID uint32, memo string) (*api.Account, e
 	data.Add("appid", strconv.Itoa(int(appID)))
 	data.Add("memo", memo)
 
-	// TODO: extract return value to convert to Account
-	_, err := s.service.post("CreateAccount", data)
+	result, err := s.service.post("CreateAccount", data)
 	if err != nil {
 		return nil, err
 	}
-	return nil, nil
+	var account api.Account
+	err = json.Unmarshal(result, &account)
+	if err != nil {
+		return nil, err
+	}
+	return &account, nil
 }
