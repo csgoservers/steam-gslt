@@ -47,12 +47,7 @@ func (g *gameServerService) get(method string) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-	response := &response{}
-	err = json.Unmarshal(body, response)
-	if err != nil {
-		return nil, err
-	}
-	return response.Data, nil
+	return g.unmarshalData(body)
 }
 
 // post executes a requests to change data using the Steam service
@@ -73,14 +68,20 @@ func (g *gameServerService) post(method string, data url.Values) ([]byte, error)
 	if err != nil {
 		return nil, err
 	}
-	response := &response{}
-	err = json.Unmarshal(body, response)
-	if err != nil {
-		return nil, err
-	}
-	return response.Data, nil
+	return g.unmarshalData(body)
 }
 
 func (g *gameServerService) buildURL(method string) string {
 	return fmt.Sprintf("%s/%s/%s?key=%s", g.url, method, "v1", g.key)
+}
+
+// unmarshalData is responsible to extract the data from the response
+// object from the Steam service.
+func (g *gameServerService) unmarshalData(body []byte) ([]byte, error) {
+	response := &response{}
+	err := json.Unmarshal(body, response)
+	if err != nil {
+		return nil, err
+	}
+	return response.Data, nil
 }
