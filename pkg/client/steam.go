@@ -2,6 +2,8 @@ package client
 
 import (
 	"encoding/json"
+	"net/url"
+	"strconv"
 
 	"github.com/csgoservers/steam-gameserver-service/pkg/api"
 )
@@ -29,4 +31,18 @@ func (s *SteamService) GetAccountList() (*api.AccountResponse, error) {
 		return nil, err
 	}
 	return &wrapper.Raw, nil
+}
+
+// CreateAccount creates a persistent game server account
+func (s *SteamService) CreateAccount(appID uint32, memo string) (*api.Account, error) {
+	data := url.Values{}
+	data.Add("appid", strconv.Itoa(int(appID)))
+	data.Add("memo", memo)
+
+	// TODO: extract return value to convert to Account
+	_, err := s.service.post("CreateAccount", data)
+	if err != nil {
+		return nil, err
+	}
+	return nil, nil
 }
