@@ -24,7 +24,7 @@ func newService(key string) *gameServerService {
 
 // get executes a request to retrieve some data from the service
 func (g *gameServerService) get(method string) ([]byte, error) {
-	url := fmt.Sprintf("%s/%s/%s?key=%s", g.url, method, "v1", g.key)
+	url := g.buildURL(method)
 
 	req, err := http.NewRequest(http.MethodGet, url, nil)
 	if err != nil {
@@ -40,7 +40,7 @@ func (g *gameServerService) get(method string) ([]byte, error) {
 
 // post executes a requests to change data using the Steam service
 func (g *gameServerService) post(method string, data url.Values) ([]byte, error) {
-	url := fmt.Sprintf("%s/%s/%s?key=%s", g.url, method, "v1", g.key)
+	url := g.buildURL(method)
 
 	req, err := http.NewRequest(http.MethodPost, url, strings.NewReader(data.Encode()))
 	if err != nil {
@@ -53,4 +53,8 @@ func (g *gameServerService) post(method string, data url.Values) ([]byte, error)
 	}
 	defer res.Body.Close()
 	return ioutil.ReadAll(res.Body)
+}
+
+func (g *gameServerService) buildURL(method string) string {
+	return fmt.Sprintf("%s/%s/%s?key=%s", g.url, method, "v1", g.key)
 }
