@@ -5,7 +5,7 @@
 
 >Project in early development.
 
-This is a Go implementation of the Steam `IGameServersService` interface. It is used to manage game servers that needs a *token* to work. If you want to use it, you need a [Steam key]().
+This is a Go implementation of the Steam `IGameServersService` interface. It is used to manage game servers that needs a *token* to work. If you want to use it, you need a [Steam key](). You can manage your Steam game server tokens through the official [web](https://steamcommunity.com/dev/managegameservers).
 
 ### References
 
