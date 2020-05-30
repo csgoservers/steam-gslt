@@ -65,3 +65,22 @@ func (s *SteamService) SetMemo(steamID int, memo string) error {
 	_, err := s.service.post("SetMemo", data)
 	return err
 }
+
+// ResetLoginToken generates a new token for the current game server.
+func (s *SteamService) ResetLoginToken(steamID int) (*api.ServerToken, error) {
+	data := url.Values{}
+	data.Add("steamid", strconv.Itoa(steamID))
+
+	result, err := s.service.post("ResetLoginToken", data)
+	if err != nil {
+		return nil, err
+	}
+	var token api.ServerToken
+	err = json.Unmarshal(result, &token)
+	if err != nil {
+		return nil, err
+	}
+	// fill steam ID on the returned server token
+	token.SteamID = strconv.Itoa(steamID)
+	return &token, nil
+}

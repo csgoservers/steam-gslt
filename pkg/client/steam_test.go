@@ -78,3 +78,23 @@ func TestSetMemo(t *testing.T) {
 	err := steam.SetMemo(80068392925402169, "hello world")
 	assert.NoError(t, err)
 }
+
+func TestResetLoginToken(t *testing.T) {
+	fn := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		f, err := ioutil.ReadFile("../../testdata/fixture_reset_token.json")
+		if err != nil {
+			assert.NoError(t, err)
+		}
+		w.Write(f)
+	})
+	steam, close := fakeServer(fn)
+	defer close()
+
+	token, err := steam.ResetLoginToken(80068392925402169)
+	assert.NoError(t, err)
+	assert.Equal(t, "A612F82D000F93F800D737B624040080", token.LoginToken)
+	assert.Equal(t, "80068392925402169", token.SteamID)
+	assert.Equal(t, 0, token.AppID)
+	assert.False(t, token.IsDeleted)
+	assert.False(t, token.IsExpired)
+}
