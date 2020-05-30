@@ -98,7 +98,8 @@ func (s *SteamService) DeleteAccount(steamID int) error {
 	return err
 }
 
-// QueryLoginToken generates a new token for the current game server.
+// QueryLoginToken check the state of the given token. If token doesn't exists
+// then this method returns an error.
 func (s *SteamService) QueryLoginToken(loginToken string) (*api.Account, error) {
 	data := url.Values{}
 	data.Add("login_token", loginToken)
