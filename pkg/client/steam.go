@@ -93,3 +93,34 @@ func (s *SteamService) DeleteAccount(steamID int) error {
 	_, err := s.service.post("DeleteAccount", data)
 	return err
 }
+
+// QueryLoginToken generates a new token for the current game server.
+func (s *SteamService) QueryLoginToken(loginToken string) (*api.Account, error) {
+	data := url.Values{}
+	data.Add("login_token", loginToken)
+
+	result, err := s.service.post("QueryLoginToken", data)
+	if err != nil {
+		return nil, err
+	}
+	var account api.Account
+	err = json.Unmarshal(result, &account)
+	if err != nil {
+		return nil, err
+	}
+	// fill account with the steam id and login token
+	var tokens []api.ServerToken
+	token := api.ServerToken{}
+	token.LoginToken = loginToken
+
+	// bacause steamid is present in the response
+	// we need to parse it manually to be able to set this ID
+	// in the ServerToken object.
+	var raw map[string]json.RawMessage
+	_ = json.Unmarshal(result, &raw)
+	_ = json.Unmarshal(raw["steamid"], &token.SteamID)
+
+	tokens = append(tokens, token)
+	account.Servers = tokens
+	return &account, nil
+}
