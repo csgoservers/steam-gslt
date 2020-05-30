@@ -33,9 +33,9 @@ func TestGetAccountList(t *testing.T) {
 	assert.NoError(t, err)
 	assert.Equal(t, "76561197900265728", accounts.Actor)
 	assert.True(t, accounts.IsBanned)
-	assert.Equal(t, 1, len(accounts.Accounts))
+	assert.Equal(t, 1, len(accounts.Servers))
 
-	account := accounts.Accounts[0]
+	account := accounts.Servers[0]
 	assert.Equal(t, "1111", account.SteamID)
 	assert.Equal(t, "abc", account.LoginToken)
 	assert.Equal(t, "test", account.Memo)

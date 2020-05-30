@@ -20,12 +20,12 @@ func New(apiKey string) *SteamService {
 
 // GetAccountList returns a list of game server accounts with their
 // connection tokens.
-func (s *SteamService) GetAccountList() (*api.AccountResponse, error) {
+func (s *SteamService) GetAccountList() (*api.Account, error) {
 	result, err := s.service.get("GetAccountList")
 	if err != nil {
 		return nil, err
 	}
-	var wrapper api.AccountResponse
+	var wrapper api.Account
 	err = json.Unmarshal(result, &wrapper)
 	if err != nil {
 		return nil, err
@@ -33,8 +33,8 @@ func (s *SteamService) GetAccountList() (*api.AccountResponse, error) {
 	return &wrapper, nil
 }
 
-// CreateAccount creates a persistent game server account
-func (s *SteamService) CreateAccount(appID int, memo string) (*api.Account, error) {
+// CreateAccount creates a persistent game server token
+func (s *SteamService) CreateAccount(appID int, memo string) (*api.ServerToken, error) {
 	data := url.Values{}
 	data.Add("appid", strconv.Itoa(appID))
 	data.Add("memo", memo)
@@ -43,14 +43,14 @@ func (s *SteamService) CreateAccount(appID int, memo string) (*api.Account, erro
 	if err != nil {
 		return nil, err
 	}
-	var account api.Account
-	err = json.Unmarshal(result, &account)
+	var token api.ServerToken
+	err = json.Unmarshal(result, &token)
 	if err != nil {
 		return nil, err
 	}
 	// fill object with data that is not present
 	// in the response object
-	account.AppID = appID
-	account.Memo = memo
-	return &account, nil
+	token.AppID = appID
+	token.Memo = memo
+	return &token, nil
 }

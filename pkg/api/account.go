@@ -1,7 +1,7 @@
 package api
 
-// Account is the Steam info for one steamid
-type Account struct {
+// ServerToken is the Steam info for one steamid
+type ServerToken struct {
 	SteamID    string `json:"steamid"`
 	LoginToken string `json:"login_token"`
 	Memo       string `json:"memo"`
@@ -11,11 +11,12 @@ type Account struct {
 	AppID      int    `json:"appid"`
 }
 
-// AccountResponse is the response that contains data about Accounts
-type AccountResponse struct {
-	Actor          string    `json:"actor"`
-	IsBanned       bool      `json:"is_banned"`
-	Expires        int       `json:"expires"`
-	LastActionTime int       `json:"last_action_time"`
-	Accounts       []Account `json:"servers"`
+// Account is the response that contains data about all server tokens
+// emited for the current account.
+type Account struct {
+	Actor          string        `json:"actor"`
+	IsBanned       bool          `json:"is_banned"`
+	Expires        int           `json:"expires"`
+	LastActionTime int           `json:"last_action_time"`
+	Servers        []ServerToken `json:"servers"`
 }

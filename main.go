@@ -21,5 +21,5 @@ func main() {
 		log.Printf("Error calling GetAccountList: %v", err)
 		return
 	}
-	log.Println(response.Accounts)
+	log.Println(response.Servers)
 }
