@@ -98,3 +98,18 @@ func TestResetLoginToken(t *testing.T) {
 	assert.False(t, token.IsDeleted)
 	assert.False(t, token.IsExpired)
 }
+
+func TestDeleteAccount(t *testing.T) {
+	fn := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		f, err := ioutil.ReadFile("../../testdata/fixture_empty_response.json")
+		if err != nil {
+			assert.NoError(t, err)
+		}
+		w.Write(f)
+	})
+	steam, close := fakeServer(fn)
+	defer close()
+
+	err := steam.DeleteAccount(80068392925402169)
+	assert.NoError(t, err)
+}

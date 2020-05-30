@@ -84,3 +84,12 @@ func (s *SteamService) ResetLoginToken(steamID int) (*api.ServerToken, error) {
 	token.SteamID = strconv.Itoa(steamID)
 	return &token, nil
 }
+
+// DeleteAccount deletes the given Steam ID.
+func (s *SteamService) DeleteAccount(steamID int) error {
+	data := url.Values{}
+	data.Add("steamid", strconv.Itoa(steamID))
+
+	_, err := s.service.post("DeleteAccount", data)
+	return err
+}
