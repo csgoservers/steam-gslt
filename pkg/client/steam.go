@@ -54,3 +54,14 @@ func (s *SteamService) CreateAccount(appID int, memo string) (*api.ServerToken, 
 	token.Memo = memo
 	return &token, nil
 }
+
+// SetMemo changes the note associated to the game server. This memo only serves as
+// a reminder of the purpose of the server token.
+func (s *SteamService) SetMemo(steamID int, memo string) error {
+	data := url.Values{}
+	data.Add("steamid", strconv.Itoa(steamID))
+	data.Add("memo", memo)
+
+	_, err := s.service.post("SetMemo", data)
+	return err
+}
