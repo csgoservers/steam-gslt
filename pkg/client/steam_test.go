@@ -138,3 +138,19 @@ func TestQueryLoginToken(t *testing.T) {
 	assert.False(t, token.IsDeleted)
 	assert.False(t, token.IsExpired)
 }
+
+func TestQueryLoginTokenNotValid(t *testing.T) {
+	fn := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		f, err := ioutil.ReadFile("../../testdata/fixture_empty_response.json")
+		if err != nil {
+			assert.NoError(t, err)
+		}
+		w.Write(f)
+	})
+	steam, close := fakeServer(fn)
+	defer close()
+
+	account, err := steam.QueryLoginToken("abcd")
+	assert.Error(t, err)
+	assert.Nil(t, account)
+}

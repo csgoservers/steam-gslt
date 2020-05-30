@@ -1,12 +1,16 @@
 package client
 
 import (
+	"bytes"
 	"encoding/json"
+	"errors"
 	"net/url"
 	"strconv"
 
 	"github.com/csgoservers/steam-gameserver-service/pkg/api"
 )
+
+var emptyJSON = []byte(`{}`)
 
 // SteamService to retrieve and send data
 type SteamService struct {
@@ -102,6 +106,12 @@ func (s *SteamService) QueryLoginToken(loginToken string) (*api.Account, error) 
 	result, err := s.service.post("QueryLoginToken", data)
 	if err != nil {
 		return nil, err
+	}
+	// if result is empty, then the game server token is not valid and we return
+	// an error. To detect if result is not valid we check if the array size is
+	// equals to 0 or if the result is equal to an empty JSON.
+	if len(result) == 0 || bytes.Compare(emptyJSON, result) == 0 {
+		return nil, errors.New("game server login token is not valid")
 	}
 	var account api.Account
 	err = json.Unmarshal(result, &account)
