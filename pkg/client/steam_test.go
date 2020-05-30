@@ -40,3 +40,27 @@ func TestGetAccountList(t *testing.T) {
 	assert.True(t, account.IsExpired)
 	assert.False(t, account.IsDeleted)
 }
+
+func TestCreateAccount(t *testing.T) {
+	fn := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		f, err := ioutil.ReadFile("../../testdata/fixture_create_account.json")
+		if err != nil {
+			assert.NoError(t, err)
+		}
+		w.Write(f)
+	})
+	server := httptest.NewServer(fn)
+	defer server.Close()
+
+	service := newService("abc")
+	service.url = server.URL
+	steam := SteamService{}
+	steam.service = service
+
+	account, err := steam.CreateAccount(730, "hello world")
+	assert.NoError(t, err)
+	assert.Equal(t, 730, account.AppID)
+	assert.Equal(t, "hello world", account.Memo)
+	assert.Equal(t, "80068392925402169", account.SteamID)
+	assert.Equal(t, "D212EAB4B33A0005CA4CD483AAAA4C9E", account.LoginToken)
+}
