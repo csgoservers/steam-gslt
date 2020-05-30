@@ -9,6 +9,15 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+func fakeServer(fn http.HandlerFunc) (SteamService, func()) {
+	server := httptest.NewServer(fn)
+	service := newService("abc")
+	service.url = server.URL
+	steam := SteamService{}
+	steam.service = service
+	return steam, server.Close
+}
+
 func TestGetAccountList(t *testing.T) {
 	fn := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		f, err := ioutil.ReadFile("../../testdata/fixture_account_list.json")
@@ -17,13 +26,8 @@ func TestGetAccountList(t *testing.T) {
 		}
 		w.Write(f)
 	})
-	server := httptest.NewServer(fn)
-	defer server.Close()
-
-	service := newService("abc")
-	service.url = server.URL
-	steam := SteamService{}
-	steam.service = service
+	steam, close := fakeServer(fn)
+	defer close()
 
 	accounts, err := steam.GetAccountList()
 	assert.NoError(t, err)
@@ -49,13 +53,8 @@ func TestCreateAccount(t *testing.T) {
 		}
 		w.Write(f)
 	})
-	server := httptest.NewServer(fn)
-	defer server.Close()
-
-	service := newService("abc")
-	service.url = server.URL
-	steam := SteamService{}
-	steam.service = service
+	steam, close := fakeServer(fn)
+	defer close()
 
 	account, err := steam.CreateAccount(730, "hello world")
 	assert.NoError(t, err)
