@@ -7,9 +7,9 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var getAccountListCmd = &cobra.Command{
-	Use:   "GetAccountList",
-	Short: "Gets a list of game server accounts with their logon tokens",
+var createAccountCmd = &cobra.Command{
+	Use:   "CreateAccount",
+	Short: "Creates a persistent game server account",
 	Run: func(cmd *cobra.Command, args []string) {
 		// check if key flag is set
 		err := checkRequiredFlags()
@@ -17,19 +17,20 @@ var getAccountListCmd = &cobra.Command{
 			rootCmd.Help()
 			return
 		}
-		executeAccountListCmd()
+		if appID == 0 {
+			cmd.Help()
+			return
+		}
+		executeCreateAccountCmd()
 	},
 }
 
-func executeAccountListCmd() {
+func executeCreateAccountCmd() {
 	steam := client.New(key)
-	accounts, err := steam.GetAccountList()
+	account, err := steam.CreateAccount(appID, memo)
 	if err != nil {
 		fmt.Printf("Error getting accounts: %v\n", err)
 		return
 	}
-	for _, server := range accounts.Servers {
-		fmt.Printf("Steam ID: %s\t Token: %s\t Memo: %s\n",
-			server.SteamID, server.LoginToken, server.Memo)
-	}
+	fmt.Println(account.LoginToken)
 }
