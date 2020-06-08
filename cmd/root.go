@@ -1,4 +1,4 @@
-package cmd
+package main
 
 import (
 	"errors"
@@ -17,11 +17,6 @@ var (
 		Short: "Command line application to request Steam game server services",
 	}
 )
-
-// Execute the root command for steamgs-cli
-func Execute() error {
-	return rootCmd.Execute()
-}
 
 func init() {
 	rootCmd.PersistentFlags().StringVarP(&key, "key", "k", "", "Steam web API key (required)")
