@@ -14,7 +14,7 @@ This is a Go implementation of the Steam `IGameServersService` interface. It is 
 
 ## How to use it?
 
-If you want to use this protocol implementation in your own projects, you only need to execute the next command in your project root directory:
+If you want to use this client implementation in your own projects, you only need to execute the next command in your project root directory:
 
 ```bash
 $ go get -u github.com/csgoservers/steam-gameserver-service/pkg
@@ -22,7 +22,7 @@ $ go get -u github.com/csgoservers/steam-gameserver-service/pkg
 
 #### CLI
 
->Command line application is incomplete.
+>Command line application is a work in progress.
 
 To use it you just need to clone this repository and execute the `make build` directive. If you want to see the full list of supported flags, then execute this command:
 
