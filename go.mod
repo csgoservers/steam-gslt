@@ -1,4 +1,4 @@
-module github.com/csgoservers/steam-gameserver-service
+module github.com/csgoservers/steam-gslt
 
 go 1.14
 

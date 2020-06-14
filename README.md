@@ -1,7 +1,7 @@
 # Steam `IGameServersService` client
 
-![GitHub repo size](https://img.shields.io/github/repo-size/csgoservers/steam-gameserver-service?logo=github&style=for-the-badge)
-![GitHub issues](https://img.shields.io/github/issues/csgoservers/steam-gameserver-service?logo=github&style=for-the-badge)
+![GitHub repo size](https://img.shields.io/github/repo-size/csgoservers/steam-gslt?logo=github&style=for-the-badge)
+![GitHub issues](https://img.shields.io/github/issues/csgoservers/steam-gslt?logo=github&style=for-the-badge)
 
 >See [license](LICENSE) if you plan to run this software. If you have any doubt [contact us](mailto:hi@csgoservers.xyz).
 
@@ -17,7 +17,7 @@ This is a Go implementation of the Steam `IGameServersService` interface. It is 
 If you want to use this client implementation in your own projects, you only need to execute the next command in your project root directory:
 
 ```bash
-$ go get -u github.com/csgoservers/steam-gameserver-service/pkg
+$ go get -u github.com/csgoservers/steam-gslt/pkg
 ```
 
 #### CLI
@@ -27,7 +27,7 @@ $ go get -u github.com/csgoservers/steam-gameserver-service/pkg
 To use it you just need to clone this repository and execute the `make build` directive. If you want to see the full list of supported flags, then execute this command:
 
 ```bash
-$ steamgs-cli --help
+$ ./gslt-cli --help
 ```
 
 ## License

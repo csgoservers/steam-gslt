@@ -13,7 +13,7 @@ var (
 	appID int
 
 	rootCmd = &cobra.Command{
-		Use:   "steamgs-cli",
+		Use:   "gslt-cli",
 		Short: "Command line application to request Steam game server services",
 	}
 )

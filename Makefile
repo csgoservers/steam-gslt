@@ -5,7 +5,7 @@ BRANCH := $(shell git rev-parse --abbrev-ref HEAD)
 
 build:
 	go build -ldflags "-X cmd.Version=$(VERSION) -X cmd.Branch=$(BRANCH)" \
-	-o steamgs-cli ./cmd
+	-o gslt-cli ./cmd
 	
 test:
 	go test -v ./pkg/...

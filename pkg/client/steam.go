@@ -7,7 +7,7 @@ import (
 	"net/url"
 	"strconv"
 
-	"github.com/csgoservers/steam-gameserver-service/pkg/api"
+	"github.com/csgoservers/steam-gslt/pkg/api"
 )
 
 var emptyJSON = []byte(`{}`)

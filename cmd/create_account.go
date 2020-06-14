@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/csgoservers/steam-gameserver-service/pkg/client"
+	"github.com/csgoservers/steam-gslt/pkg/client"
 	"github.com/spf13/cobra"
 )
 
