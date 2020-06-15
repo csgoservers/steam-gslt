@@ -20,6 +20,20 @@ If you want to use this client implementation in your own projects, you only nee
 $ go get -u github.com/csgoservers/steam-gslt/pkg
 ```
 
+In order to use it in your own projects you can use this code template:
+
+```go
+import "github.com/csgoservers/steam-gslt/pkg/client"
+
+func main() {
+  key := "use your own Steam API key"
+  steam := client.New(key)
+  accounts, err := steam.GetAccountList()
+}
+```
+
+>This is an example that retrieves all accounts from your Steam API key.
+
 #### CLI
 
 >Command line application is a work in progress.
