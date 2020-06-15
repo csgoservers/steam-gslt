@@ -29,10 +29,23 @@ func main() {
   key := "use your own Steam API key"
   steam := client.New(key)
   accounts, err := steam.GetAccountList()
+  if err != nil {
+    return
+  }
+  // use `accounts` here
 }
 ```
 
 >This is an example that retrieves all accounts from your Steam API key.
+
+Implemented methods in this library are:
+
+* [`GetAccountList`](https://partner.steamgames.com/doc/webapi/IGameServersService#GetAccountList)
+* [`CreateAccount`](https://partner.steamgames.com/doc/webapi/IGameServersService#CreateAccount)
+* [`SetMemo`](https://partner.steamgames.com/doc/webapi/IGameServersService#SetMemo)
+* [`ResetLoginToken`](https://partner.steamgames.com/doc/webapi/IGameServersService#ResetLoginToken)
+* [`DeleteAccount`](https://partner.steamgames.com/doc/webapi/IGameServersService#DeleteAccount)
+* [`QueryLoginToken`](https://partner.steamgames.com/doc/webapi/IGameServersService#QueryLoginToken)
 
 #### CLI
 
